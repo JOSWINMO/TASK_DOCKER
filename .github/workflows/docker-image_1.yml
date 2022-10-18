@@ -16,6 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build and push the Docker image
-      run:  docker login -u "joswinmo" --password-stdin ${{secrets.DOCKER_TOKEN}}
-        docker image build -t hello_world .
-        docker push joswinmo/hello_world
+      run: docker build . --file Dockerfile --tag joswinmo/hello_world
+    - name: Push the Docker image
+      run: docker login -u joswinmo --password-stdin ${{secrets.DOCKER_TOKEN}} && docker push joswinmo/hello_world
+    
+    
+    
